@@ -1,0 +1,54 @@
+backend:
+  name: test-repo
+
+media_folder: static/img
+public_folder: /img
+
+collections:
+  - name: "pages"
+    label: "Pages"
+    files:
+      - file: "src/pages/index.md"
+        label: "Home Page"
+        name: "Home Page"
+        fields:
+          - {
+              label: "Template Key",
+              name: "templateKey",
+              widget: "hidden",
+              default: "index-page",
+            }
+          - { label: Title, name: title, widget: string }
+          - { label: Image, name: image, widget: image }
+          - { label: Heading, name: heading, widget: string }
+          - { label: Subheading, name: subheading, widget: string }
+          - { label: Description, name: description, widget: string }
+
+  - name: "doc"
+    label: "Doc"
+    folder: "src/docs/"
+    create: true
+    slug: "{{doc-section}}/{{slug}}"
+    fields:
+      - {
+          label: "Template Key",
+          name: "templateKey",
+          widget: "hidden",
+          default: "doc-post",
+        }
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Published Date", name: "date", widget: "datetime" }
+      - {
+          label: "Doc Section",
+          name: "doc-section",
+          widget: "select",
+          options: [
+            { label: "Overview", value: "overview"},
+            { label: "Content", value: "content"},
+            { label: "Engineering", value: "engineering"},
+            { label: "Misc", value: "misc"},
+          ]
+        }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Body", name: "body", widget: "markdown" }
+      - { label: "Tags", name: "tags", widget: "list" }
